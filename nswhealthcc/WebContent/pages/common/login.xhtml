@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="/templates/layoutlogin.xhtml">
+ 
+
+<ui:define name="content">
+<h:head>
+</h:head>
+<h:body>
+    <div align="right" style="">
+        <h:form  id="loginFormId" prependId="false">
+                <div id="loginFieldsPnlId">
+                    <div id="loginFieldUsrContId">
+                        <h:outputLabel id="outTxtUserNameId" value="Username:" name="outTxtUserNameNm"></h:outputLabel>
+                        <p:inputText id="userName" required="true" value="#{loginMgmtBean.userName}" requiredMessage="Please enter username"></p:inputText>
+                        <h:outputLabel id="outLblUserNameId" for="userName" name="outLblUserNameNm"></h:outputLabel>
+                    </div>
+                    <div id="loginFieldPassContId">
+                        <h:outputLabel id="outTxtPasswordId" value="Password:" name="outTxtPasswordNm"></h:outputLabel>
+                        <p:password id="password"  required="true" value="#{loginMgmtBean.password}" requiredMessage="Please enter password"></p:password>
+                        <h:outputLabel id="outLblPasswordId" for="password" name="outLblPasswordNm"></h:outputLabel>
+                    </div>
+                    <div id="loginFieldPassContId">
+                        <h:selectBooleanCheckbox id="rememberMe" value="#{loginMgmtBean.rememberMe}" label="Remember Me">Remember Me</h:selectBooleanCheckbox>
+                    </div>
+                </div>
+                <div id="loginBtnPanelId">
+                    <p:commandButton id="btnLoginId" value="Login" action="#{loginMgmtBean.login}" styleClass="loginPanelBtn"></p:commandButton>
+                  
+                </div>
+        </h:form>
+    </div>
+    <div>
+        <h:messages></h:messages>
+    </div>
+</h:body>
+</ui:define> </ui:composition>
