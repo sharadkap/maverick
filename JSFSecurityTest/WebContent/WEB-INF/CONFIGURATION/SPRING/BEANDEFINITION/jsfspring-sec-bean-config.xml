@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:sec="http://www.springframework.org/schema/security"
+    xsi:schemaLocation="
+ 
+http://www.springframework.org/schema/beans
+ 
+ 
+http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+ 
+ 
+http://www.springframework.org/schema/security
+ 
+ 
+http://www.springframework.org/schema/security/spring-security-3.1.xsd"
+ 
+       >
+        
+    <beans:bean id="navigator" name="navigator" class="com.mumz.jsfspringsec.beans.Navigator" scope="session">
+    </beans:bean>
+     
+    <beans:bean id="loginBean" name="loginBean" class="com.mumz.jsfspringsec.beans.LoginBean" scope="prototype">
+        <beans:property name="authenticationManager" ref="authenticationManager"></beans:property>
+        <beans:property name="rememberMeServices" ref="rememberMeServices"></beans:property>
+        <beans:property name="userDetailsService" ref="customjdbcUserService"></beans:property>
+    </beans:bean>
+     
+    <beans:bean id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <beans:property name="url" value="jdbc:mysql://localhost:3306/jsf-spring-security" />
+        <beans:property name="username" value="root" />
+        <beans:property name="password" value="password" />
+   </beans:bean>
+    
+   <beans:bean id="customjdbcUserService" class="com.mumz.jsfspringsec.dao.CustomJDBCDaoImpl">
+        <beans:property name="dataSource" ref="dataSource"/>
+        <beans:property name="enableAuthorities" value="false"/>
+        <beans:property name="enableGroups" value="true"></beans:property>
+        <beans:property name="usersByUsernameQuery">
+            <beans:value>SELECT JSF_SPRING_SEC_USERS_USERNAME, JSF_SPRING_SEC_USERS_PASSWORD, JSF_SPRING_SEC_USERS_ENABLED FROM JSF_SPRING_SEC_USERS WHERE JSF_SPRING_SEC_USERS_USERNAME = ?</beans:value>
+        </beans:property>
+        <beans:property name="authoritiesByUsernameQuery">
+            <beans:value>
+                 SELECT JSF_SPRING_SEC_ROLES_USERNAME,JSF_SPRING_SEC_ROLES_ROLE_NAME from JSF_SPRING_SEC_ROLES where JSF_SPRING_SEC_ROLES_USERNAME = ?
+            </beans:value>
+        </beans:property>
+        <beans:property name="groupAuthoritiesByUsernameQuery">
+            <beans:value>
+                SELECT 
+                        GROUPDTLS.JSF_SPRING_SEC_GROUPS_GROUP_ID, 
+                        GROUPDTLS.JSF_SPRING_SEC_GROUPS_GROUP_NAME, 
+                        GROUPPERMISSION.JSF_SPRING_SEC_GROUP_AUTHORITIES_AUTHORITY 
+                FROM 
+                        JSF_SPRING_SEC_GROUPS GROUPDTLS, 
+                        JSF_SPRING_SEC_GROUP_AUTHORITIES GROUPPERMISSION, 
+                        JSF_SPRING_SEC_GROUP_MEMBERS GROUPMEMBERS, 
+                        JSF_SPRING_SEC_USERS USERS 
+                WHERE 
+                        USERS.JSF_SPRING_SEC_USERS_USERNAME = ? AND 
+                        GROUPMEMBERS.JSF_SPRING_SEC_GROUP_MEMBERS_USER_ID = USERS.PK_JSF_SPRING_SEC_USERS AND 
+                        GROUPMEMBERS.JSF_SPRING_SEC_GROUP_MEMBERS_GROUP_ID = GROUPDTLS.JSF_SPRING_SEC_GROUPS_GROUP_ID AND 
+                        GROUPPERMISSION.JSF_SPRING_SEC_GROUP_AUTHORITIES_GROUP_ID = GROUPDTLS.JSF_SPRING_SEC_GROUPS_GROUP_ID 
+            </beans:value>
+        </beans:property>
+   </beans:bean>
+    
+    <beans:bean id="rememberMeServices"
+        class="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices">
+        <beans:property name="key" value="jsfspring-sec" /> 
+        <beans:property  name="userDetailsService" ref="customjdbcUserService" /> 
+        <beans:property  name="alwaysRemember" value="true" /> 
+        <beans:property  name="tokenValiditySeconds" value="60" /> 
+    </beans:bean>
+     
+    <beans:bean id="rememberMeAuthenticationProvider"
+        class="org.springframework.security.authentication.RememberMeAuthenticationProvider">
+        <beans:property name="key" value="jsfspring-sec"/>
+    </beans:bean>
+     
+    <beans:bean id="rememberMeFilter"
+        class="org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter">
+        <beans:property name="rememberMeServices" ref="rememberMeServices"/>
+        <beans:property name="authenticationManager" ref="authenticationManager" />
+    </beans:bean>
+     
+    <beans:bean class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" id="passwordEncoder">
+    </beans:bean>
+     
+    <beans:bean id="databasePasswordEncrypter" class="com.mumz.jsfspringsec.dao.security.DBPasswordEncrypterBean" init-method="encryptDBPassword" depends-on="dataSource">
+        <beans:property name="passwordEncoder" ref="passwordEncoder"></beans:property>
+        <beans:property name="dataSource" ref="dataSource"></beans:property>
+        <beans:property name="selectQuery">
+            <beans:value>SELECT JSF_SPRING_SEC_USERS_USERNAME, JSF_SPRING_SEC_USERS_PASSWORD, JSF_SPRING_SEC_USERS_ENCRYPTED FROM JSF_SPRING_SEC_USERS WHERE (JSF_SPRING_SEC_USERS_ENCRYPTED='' || JSF_SPRING_SEC_USERS_ENCRYPTED IS NULL)</beans:value>
+        </beans:property>
+        <beans:property name="updateQuery">
+            <beans:value>UPDATE JSF_SPRING_SEC_USERS SET JSF_SPRING_SEC_USERS_PASSWORD = ?, JSF_SPRING_SEC_USERS_ENCRYPTED='YES' WHERE JSF_SPRING_SEC_USERS_USERNAME = ? </beans:value>
+        </beans:property>
+    </beans:bean>
+</beans:beans>

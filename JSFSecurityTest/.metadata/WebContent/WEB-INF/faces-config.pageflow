@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13817253787210" configfile="/JSFSecurityTest/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="pages/home/home.xhtml" x="554" y="178" id="pf13817291208641" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" outlinks="pf13817291208642 pf13817291208653" inlinks="pf13817291208654 pf13817291208655" path="/pages/home/home.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/secure/secured.xhtml" x="338" y="178" id="pf13817291208656" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" outlinks="pf13817291208654" inlinks="pf13817291208642 pf13817291208657" path="/pages/secure/secured.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/unsecure/unsecured.xhtml" x="770" y="178" id="pf13817291208658" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf13817291208653" path="/pages/unsecure/unsecured.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/common/login.xhtml" x="122" y="178" id="pf13817291208659" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf13817291208657 pf13817291208655" path="/pages/common/login.xhtml"/>
+  <links id="pf13817291208642" target="pf13817291208656" source="pf13817291208641" outcome="Secured" redirect="true" fromaction="#{navigator.navigateTo}"/>
+  <links id="pf13817291208653" target="pf13817291208658" source="pf13817291208641" outcome="UnSecured" redirect="true" fromaction="#{navigator.navigateTo}"/>
+  <links id="pf13817291208654" target="pf13817291208641" source="pf13817291208656" outcome="loggedout" redirect="true" fromaction="#{loginMgmtBean.logout}"/>
+  <links id="pf13817291208657" target="pf13817291208656" source="pf13817291208659" outcome="Secured" fromaction="#{loginMgmtBean.login}"/>
+  <links id="pf13817291208655" target="pf13817291208641" source="pf13817291208659" outcome="home" fromaction="#{loginMgmtBean.login}"/>
+</pageflow:Pageflow>
