@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13815797101310" configfile="/NSWHealth/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="pages/index.xhtml" x="122" y="946" id="pf13816204082884" referenceLink="//@navigationRule.0/@fromViewId|" path="/pages/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="welcome.xhtml" x="168" y="84" id="pf138162071574211" outlinks="pf138162150792712 pf138162150792713" path="/welcome.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="WEB-INF/pages/success.xhtml" x="276" y="12" id="pf138162150792814" inlinks="pf138162150792713" path="/WEB-INF/pages/success.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="WEB-INF/pages/error.xhtml" x="276" y="149" id="pf138162150792815" inlinks="pf138162150792712" path="/WEB-INF/pages/error.xhtml"/>
+  <links id="pf138162150792712" target="pf138162150792815" source="pf138162071574211" outcome="error"/>
+  <links id="pf138162150792713" target="pf138162150792814" source="pf138162071574211" outcome="success"/>
+</pageflow:Pageflow>
