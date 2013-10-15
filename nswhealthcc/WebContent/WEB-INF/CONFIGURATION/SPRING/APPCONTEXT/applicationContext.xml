@@ -12,7 +12,7 @@
 	<context:component-scan base-package="au.gov.nswhealth.assessment.managed.bean" />
 	
 	<!-- Beans Declaration -->
-	<bean id="intlMedicalGrad" class="au.gov.nswhealth.assessment.model.IntlMedicalGrads"/>
+	<bean id="intlMedicalGradModel" class="au.gov.nswhealth.assessment.model.IntlMedicalGrads"/>
 	
 	<!-- User Service Declaration -->
 	<bean id="intlMedicalGradService" class="au.gov.nswhealth.assessment.user.service.IntlMedicalGradsServiceImpl">

@@ -7,7 +7,16 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 	<div style="background-color: #abd2e1;"> 
 		<h:outputText value="#{msg['header.title']}"/>
-		<!--  <p:breadCrumb model="#{breadcrumsManagedBean.breadcrumbmodel}"/> -->
-		 <h:graphicImage value="/images/logo.gif" height="107" style="vertical-align:left;"  />
+		<table> 
+		<tr> 
+			<td>  
+			  <h:graphicImage value="/images/header1.png"  style="vertical-align:right;" /> 
+			</td>
+			<td></td>
+		<td width="20%">
+			 <h:graphicImage value="/images/logo.gif" /> </td>
+		</tr>
+		</table>
+	
 	</div>
 </ui:composition>

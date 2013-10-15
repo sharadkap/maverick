@@ -10,30 +10,31 @@
         <title>Title</title>
     </h:head>
     <h:body>
+    <h:outputStylesheet library="default" name="1.0/css/nswhealthStyle.css" />
         <p:layout fullPage="true">
-            <p:layoutUnit position="north" header="Work Based Assessment for International Medical Graduates" resizable="false" closable="false" collapsible="true" size="150" gutter="1"
+            <p:layoutUnit position="north" header="Work Based Assessment for International Medical Graduates" resizable="false" closable="false" collapsible="true" size="157" gutter="0"
                                style="margin: 0 0 0 0; padding:0 0 0 0; border: 0px;">
                <ui:include src="header.xhtml" />
             </p:layoutUnit>
 
             <p:layoutUnit position="south" size="100" header="Contacts" resizable="true" closable="false" collapsible="true" gutter="0"
                                style="margin: 0 0 0 0; padding:0 0 0 0; border: 0px;">
-                <h:outputText value="South unit content." />
+                <p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" /> 
             </p:layoutUnit>
 
             <p:layoutUnit position="west" size="200" header="Links" resizable="true" closable="false" collapsible="true" >
                 <h:form>
+                
                     <ui:include src="menu.xhtml" />
                 </h:form>
             </p:layoutUnit>
 
-            <p:layoutUnit position="east" size="200" header="Jump to.." resizable="true" closable="false" collapsible="true" effect="drop" gutter="0"
+            <p:layoutUnit position="east" size="230" header="Jump to.." resizable="true" closable="false" collapsible="true" effect="drop" gutter="0"
                                >
-                <h:outputText value="Right unit content." />
+                <p:button href="/pages/secure/home.jsf" icon="ui-icon-home" value="Home"></p:button>
             </p:layoutUnit>
 
-            <p:layoutUnit position="center" gutter="0"
-                               style="margin: 0 0 0 0; padding:0 0 0 0; border: 3px; ">
+            <p:layoutUnit position="center" gutter="0">
                 <ui:insert name="content"></ui:insert>
             </p:layoutUnit>
         </p:layout>

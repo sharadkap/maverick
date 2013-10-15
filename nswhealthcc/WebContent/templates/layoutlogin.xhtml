@@ -13,7 +13,14 @@
         <p:layout fullPage="true">
             <p:layoutUnit position="north" header="Work Based Assessment for International Medical Graduates" resizable="false" closable="false" collapsible="true" size="157" gutter="0"
                                style="margin: 0 0 0 0; padding:0 0 0 0; border: 0px;">
-               <ui:include src="header.xhtml" />
+              
+              <div style="background-color: #abd2e1;"> 
+		<h:outputText value="#{msg['header.title']}"/>
+		<!--  <p:breadCrumb model="#{breadcrumsManagedBean.breadcrumbmodel}"/> -->
+		 <h:graphicImage value="/images/logo.gif" height="107" style="vertical-align:left;"  />
+		 
+	</div>
+              
             </p:layoutUnit>
 
                         

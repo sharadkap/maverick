@@ -8,54 +8,337 @@
 
 <ui:define name="content">
 
- <h:head><title></title></h:head>  
+ <h:head><title> Mini CEX Emergency </title></h:head>  
  <h:body>
+ <h:outputLabel style="font-size:20px;color:blue;font-weight:bold;text-decoration:underline" value="MINI-CEX EMERGENCY FORM"> </h:outputLabel>
+ <br/>
+ <br/>
      <h:form>      
 	     <table> 
 	     
 		      <tr>
 		     	<td><h:outputLabel for="date" value="Date " /></td>
-		     	<td><p:calendar value="#{intlMedicalGrad.assessmentDate}" id="cal" showButtonPanel="true"/>  
-		     		<p:message id="dateMsg" for="id" display="default"/> 
+		     	<td><p:calendar value="#{intlMedicalGrad.assessmentDate}" id="date" showButtonPanel="true" size="10"/>  
+		     		<p:message id="dateMsg" for="date" display="default"/> 
 		     	</td>
+		     	</tr>
+		     	<tr>
 		     	<td><h:outputLabel for="name" value="Name " /></td>
-		     	<td><p:inputText id="name" value="#{intlMedicalGrad.candidateName}">
+		     	<td><p:inputText id="name" value="#{intlMedicalGrad.candidateName}" size="30">
 		     			<f:validateLength maximum="100" /> 
 		     			<p:ajax event="blur" update="nameMsg" />
 		     		</p:inputText>
 		     		<p:message id="nameMsg" for="name" display="default"/> 
 		     	</td>
-		     	<td><h:outputLabel for="name" value="Candidate No " /></td>
-		     	<td><p:inputText id="name" value="#{intlMedicalGrad.candidateNumber}">
+		     	</tr>
+		     	<tr>
+		     	<td><h:outputLabel for="candNum" value="Candidate No. " /></td>
+		     	<td><p:inputText id="candNum" value="#{intlMedicalGrad.candidateNumber}">
 		     			
-		     			<p:ajax event="blur" update="nameMsg" />
+		     			<p:ajax event="blur" update="numMsg" />
 		     		</p:inputText>
-		     		<p:message id="nameMsg" for="name" display="default"/> 
+		     		<p:message id="numMsg" for="candNum" display="default"/> 
 		     	</td>
 		     </tr>
 		     <tr>
 		     
 		     	<td><h:outputLabel for="assessor" value="Assessor " /></td>
-		     	<td><p:inputText id="assessor" value="#{intlMedicalGrad.accessorName}">
+		     	<td><p:inputText id="assessor" value="#{intlMedicalGrad.accessorName}" size="30">
 		     			<f:validateLength maximum="100" /> 
 		     		    <p:ajax event="blur" update="assessorMsg" />
 		     		</p:inputText>
 		     		<p:message id="assessorMsg" for="assessor" display="default"/> 
 		     	</td>
-		     	<td><h:outputLabel for="position" value="Position " /></td>
-						<td><p:selectOneRadio id="options" value="#{intlMedicalGrad.assessorPosition}">
+		     	
+					
+		     </tr>
+		     <tr>
+		     <td><h:outputLabel for="position" value="Position " /></td>
+						<td><p:selectOneRadio id="position" value="#{intlMedicalGrad.assessorPosition}">
 								<f:selectItem itemLabel="Specialist" itemValue="Specialist" />
 								<f:selectItem itemLabel="Registrar" itemValue="Registrar" />
 								<f:selectItem itemLabel="CMO" itemValue="CMO" />
 							</p:selectOneRadio> <p:message id="positionMsg" for="position" display="default" /></td>
-					
 		     </tr>
 		     
-		            
-	         <tr>
-		     	<td><p:commandButton id="addGradRecord" value="Save" action="#{intlMedicalGrad.addMedicalGraduateRecord}" ajax="true"/></td>
-		     	<td><p:commandButton id="reset" value="Reset" action="#{intlMedicalGrad.reset}" ajax="false"/></td>
+		     <tr>
+		     <td><h:outputLabel for="clinicalSettings" value="Clinical Settings " /></td>
+		     <td>
+		     <p:inputTextarea id="clinicalSettings" rows="3" cols="100" counter="counterclinicalSettings" maxlength="250" counterTemplate="{0} characters remaining." autoResize="false" value="#{intlMedicalGrad.clinicalSettings}"/>    
+				<h:outputText id="counterclinicalSettings" /> 
+		     
+		     </td>
+		     </tr>
+		     
+		     <tr>
+		     <td><h:outputLabel for="clinicalProblems" value="Clinical Problems " /></td>
+		     <td>
+		     <p:inputTextarea  id="clinicalProblems" rows="3" cols="100" counter="counterclinicalProblems" maxlength="250" counterTemplate="{0} characters remaining." autoResize="false" value="#{intlMedicalGrad.clinicalProblems}"/>    
+				<h:outputText id="counterclinicalProblems" /> 
+		     
+		     </td>
+		     </tr>
+		     
+		     <tr>
+		     <td><h:outputLabel for="focusImgEnc" value="Focus on IMG Encounter " /></td>
+		     <td><p:selectOneRadio id="focusImgEnc" value="#{intlMedicalGrad.focusImgEncounter}">
+								<f:selectItem itemLabel="History" itemValue="History" />
+								<f:selectItem itemLabel="Diagnoses" itemValue="Diagnoses" />
+								<f:selectItem itemLabel="Communication" itemValue="Communication" />
+								<f:selectItem itemLabel="Management" itemValue="Management" />
+							</p:selectOneRadio> <p:message id="focusImgEncMsg" for="focusImgEnc" display="default" /></td>
+		     </tr>
+		     
+		     <tr>
+		     <td><h:outputLabel for="imgCareComplexity" value="Complexity of IMG Care " /></td>
+		     <td><p:selectOneRadio id="imgCareComplexity" value="#{intlMedicalGrad.imgCareComplexity}">
+								<f:selectItem itemLabel="Low" itemValue="Low" />
+								<f:selectItem itemLabel="Average" itemValue="Average" />
+								<f:selectItem itemLabel="High" itemValue="High" />
+								
+							</p:selectOneRadio> <p:message id="imgCareComplexityMsg" for="imgCareComplexity" display="default" /></td>
+		     </tr>
+		     
+		     <tr>
+		     <td><h:outputLabel for="mrn" value="MRN " /></td>
+		     	<td><p:inputText id="mrn" value="#{intlMedicalGrad.mrn}">
+		     			
+		     			<p:ajax event="blur" update="mrnMsg" />
+		     		</p:inputText>
+		     		<p:message id="mrnMsg" for="mrn" display="default"/> 
+		     	</td>
+		     
+		     </tr>
+		     
+		        <tr>
+		        <td>
+		        	
+				</td>
+		        
+		        </tr>
+		        </table>	   
+			    
+			    
+	<p:panel id="pnl" header="Please grade the following areas using the scale below: (1-3 Unsatisfactory, 4-6 Satisfactory, 7-9 Superior)" toggleable="true" widgetVar="panel" >  
+       <div > 
+       <table>
+       <tr style="background-color: #abd2e1;">
+       <td width="5%" align="center"><b>1</b></td>
+       <td width="60%"> <b><h:outputLabel value="Medical Interviewing Skills " /></b></td>
+       
+       <td> 
+       <p:selectOneRadio id="medInterviewGrades" value="#{intlMedicalGrad.medInterviewGrades}">
+       							<f:selectItem itemLabel="NA" itemValue="0" />
+								<f:selectItem itemLabel="1" itemValue="1" />
+								<f:selectItem itemLabel="2" itemValue="2" />
+								<f:selectItem itemLabel="3" itemValue="3" />
+								<f:selectItem itemLabel="4" itemValue="4" />
+								<f:selectItem itemLabel="5" itemValue="5" />
+								<f:selectItem itemLabel="6" itemValue="6" />
+								<f:selectItem itemLabel="7" itemValue="7" />
+								<f:selectItem itemLabel="8" itemValue="8" />
+								<f:selectItem itemLabel="9" itemValue="9" />
+							</p:selectOneRadio>
+       
+       </td>
+       
+       </tr>
+       
+       <tr>
+       <td align="center"> <b>2</b></td>
+       <td > <b><h:outputLabel value="Physical Examination Skills " /> </b></td>
+       
+       <td> 
+       
+       <p:selectOneRadio id="physicalExamsGrades" value="#{intlMedicalGrad.physicalExamsGrades}">
+       							<f:selectItem itemLabel="NA" itemValue="0" />
+								<f:selectItem itemLabel="1" itemValue="1" />
+								<f:selectItem itemLabel="2" itemValue="2" />
+								<f:selectItem itemLabel="3" itemValue="3" />
+								<f:selectItem itemLabel="4" itemValue="4" />
+								<f:selectItem itemLabel="5" itemValue="5" />
+								<f:selectItem itemLabel="6" itemValue="6" />
+								<f:selectItem itemLabel="7" itemValue="7" />
+								<f:selectItem itemLabel="8" itemValue="8" />
+								<f:selectItem itemLabel="9" itemValue="9" />
+							</p:selectOneRadio>
+       
+       </td>
+       </tr>
+       
+       <tr style="background-color: #abd2e1;">
+       <td align="center"> <b>3 </b></td>
+       <td > <b><h:outputLabel value="Professionalism/Humanistic Qualities" /></b></td>
+       
+       <td> 
+       
+       <p:selectOneRadio id="profHumanQualGrades" value="#{intlMedicalGrad.profHumanQualGrades}">
+       							<f:selectItem itemLabel="NA" itemValue="0" />
+								<f:selectItem itemLabel="1" itemValue="1" />
+								<f:selectItem itemLabel="2" itemValue="2" />
+								<f:selectItem itemLabel="3" itemValue="3" />
+								<f:selectItem itemLabel="4" itemValue="4" />
+								<f:selectItem itemLabel="5" itemValue="5" />
+								<f:selectItem itemLabel="6" itemValue="6" />
+								<f:selectItem itemLabel="7" itemValue="7" />
+								<f:selectItem itemLabel="8" itemValue="8" />
+								<f:selectItem itemLabel="9" itemValue="9" />
+							</p:selectOneRadio>
+       
+       </td>
+       </tr>
+       
+       <tr>
+       <td align="center"> <b>4</b></td>
+       <td > <b><h:outputLabel value="Counselling Skills " /></b></td>
+       
+       <td> 
+       
+       <p:selectOneRadio id="councellingGrades" value="#{intlMedicalGrad.councellingGrades}">
+       							<f:selectItem itemLabel="NA" itemValue="0" />
+								<f:selectItem itemLabel="1" itemValue="1" />
+								<f:selectItem itemLabel="2" itemValue="2" />
+								<f:selectItem itemLabel="3" itemValue="3" />
+								<f:selectItem itemLabel="4" itemValue="4" />
+								<f:selectItem itemLabel="5" itemValue="5" />
+								<f:selectItem itemLabel="6" itemValue="6" />
+								<f:selectItem itemLabel="7" itemValue="7" />
+								<f:selectItem itemLabel="8" itemValue="8" />
+								<f:selectItem itemLabel="9" itemValue="9" />
+							</p:selectOneRadio>
+       
+       </td>
+       </tr>
+       
+       <tr style="background-color: #abd2e1;">
+       <td align="center"><b> 5</b></td>
+       <td > <b><h:outputLabel value="Clinical Judgement" /></b></td>
+       
+       <td> 
+       
+       <p:selectOneRadio id="clinicalJudgeGrades" value="#{intlMedicalGrad.clinicalJudgeGrades}">
+       							<f:selectItem itemLabel="NA" itemValue="0" />
+								<f:selectItem itemLabel="1" itemValue="1" />
+								<f:selectItem itemLabel="2" itemValue="2" />
+								<f:selectItem itemLabel="3" itemValue="3" />
+								<f:selectItem itemLabel="4" itemValue="4" />
+								<f:selectItem itemLabel="5" itemValue="5" />
+								<f:selectItem itemLabel="6" itemValue="6" />
+								<f:selectItem itemLabel="7" itemValue="7" />
+								<f:selectItem itemLabel="8" itemValue="8" />
+								<f:selectItem itemLabel="9" itemValue="9" />
+							</p:selectOneRadio>
+       
+       </td>
+       </tr>
+       <tr >
+       <td align="center"><b> 6</b></td>
+       <td ><b> <h:outputLabel value="Organisation/Efficiency" /></b></td>
+       
+       <td> 
+       
+       <p:selectOneRadio id="orgEfficiencyGrades" value="#{intlMedicalGrad.orgEfficiencyGrades}">
+       							<f:selectItem itemLabel="NA" itemValue="0" />
+								<f:selectItem itemLabel="1" itemValue="1" />
+								<f:selectItem itemLabel="2" itemValue="2" />
+								<f:selectItem itemLabel="3" itemValue="3" />
+								<f:selectItem itemLabel="4" itemValue="4" />
+								<f:selectItem itemLabel="5" itemValue="5" />
+								<f:selectItem itemLabel="6" itemValue="6" />
+								<f:selectItem itemLabel="7" itemValue="7" />
+								<f:selectItem itemLabel="8" itemValue="8" />
+								<f:selectItem itemLabel="9" itemValue="9" />
+							</p:selectOneRadio>
+       
+       </td>
+       </tr>
+       <tr style="background-color: #abd2e1;">
+       <td align="center"><b> 7</b></td>
+       <td > <b><h:outputLabel value="Overall Clinical Competence" /></b></td>
+       
+       <td> 
+       
+       <p:selectOneRadio id="ovelCompetenceGrades" value="#{intlMedicalGrad.ovelCompetenceGrades}">
+       							<f:selectItem itemLabel="NA" itemValue="0" />
+								<f:selectItem itemLabel="1" itemValue="1" />
+								<f:selectItem itemLabel="2" itemValue="2" />
+								<f:selectItem itemLabel="3" itemValue="3" />
+								<f:selectItem itemLabel="4" itemValue="4" />
+								<f:selectItem itemLabel="5" itemValue="5" />
+								<f:selectItem itemLabel="6" itemValue="6" />
+								<f:selectItem itemLabel="7" itemValue="7" />
+								<f:selectItem itemLabel="8" itemValue="8" />
+								<f:selectItem itemLabel="9" itemValue="9" />
+							</p:selectOneRadio>
+       
+       </td>
+       </tr>
+       </table>
+       </div>
+    </p:panel>  
+			  
+			 <br> </br> 
+			    
+		   <table>  
+		   
+		   <tr>
+		     <td><h:outputLabel for="minicextime" value="Mini-CEX time - Observing " /></td>
+		     	<td><p:inputText id="minicextime" value="#{intlMedicalGrad.miniCexTime}"> 
+		     			
+		     			<p:ajax event="blur" update="minicextimeMsg" />
+		     		</p:inputText> min.
+		     		<p:message id="minicextimeMsg" for="minicextime" display="default"/> 
+		     	</td>
+		     
 		     </tr>   
+		     <tr>
+		     <td><h:outputLabel for="feedbackTime" value="Providing feedback " /></td>
+		     	<td><p:inputText id="feedbackTime" value="#{intlMedicalGrad.feedbackTime}">
+		     			
+		     			<p:ajax event="blur" update="feedbackTimeMsg" />
+		     		</p:inputText> min.
+		     		<p:message id="feedbackTimeMsg" for="feedbackTime" display="default"/> 
+		     	</td>
+		     
+		     </tr>   
+		     
+		        <tr>
+		     <td><h:outputLabel for="docPerformanceComments" value="Comments on the doctor's performance: (Please describe what was effected, what could be improved and your overall impression.)" /></td>
+		     	<td>
+		     <p:inputTextarea  id="docPerformanceComments" rows="3" cols="100" counter="docPerformanceCommentsCounter" maxlength="250" counterTemplate="{0} characters remaining." autoResize="false" value="#{intlMedicalGrad.docPerformanceComments}"/>    
+				<h:outputText id="docPerformanceCommentsCounter" /> 
+		     
+		     </td>
+		     
+		     </tr>  
+		     </table>
+		     <table>
+		     <tr>
+		     <td><h:outputLabel for="levelOfPerformance" value="Rate the doctor's level of performance relative to that expected*: " /></td></tr>
+		     <tr>
+		     <td><p:selectOneRadio id="levelOfPerformance" value="#{intlMedicalGrad.levelOfPerformance}">
+								<f:selectItem itemLabel="Did not meet expectation" itemValue="Did not meet expectation" />
+								<f:selectItem itemLabel="Borderline" itemValue="Borderline" />
+								<f:selectItem itemLabel="Met expectation" itemValue="Met expectation" />
+							</p:selectOneRadio> <p:message id="levelOfPerformanceMsg" for="levelOfPerformance" display="default" /></td>
+		     </tr>
+		     <tr>
+		     <td><h:outputLabel for="currentAppointmentLevel" value="Current level of Appointment*: " /> 
+		     <p:inputText id="currentAppointmentLevel" value="#{intlMedicalGrad.currentAppointmentLevel}" size="40">
+		     			
+		     			<p:ajax event="blur" update="currentAppointmentLevelMsg" />
+		     		</p:inputText>
+		     		<p:message id="currentAppointmentLevelMsg" for="currentAppointmentLevel" display="default"/> 
+		     
+		     </td></tr>
+		     
+		     
+	         <tr>
+		     	<td><p:commandButton id="addGradRecord" value="Save" action="#{intlMedicalGrad.addMedicalGraduateRecord}" ajax="true" icon="ui-icon-disk"/></td>
+		     	<td><p:commandButton id="reset" value="Reset" action="#{intlMedicalGrad.reset}" ajax="false"/></td>
+		     </tr>  
+		     
+		      
 	     </table>
      </h:form>      
 </h:body>

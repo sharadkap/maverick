@@ -65,7 +65,7 @@ public class IntlMedicalGrads {
 	 */
 	
 	@Column(name="CANDIDATE_NO", unique = false, nullable = false)
-	public int getCandidateNumber() {
+	public Integer getCandidateNumber() {
 		return candidateNumber;
 	}
 	
@@ -248,7 +248,7 @@ public class IntlMedicalGrads {
 		this.mrn = mrn;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "intl_medical_grads_data", cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "intMedicalGrads", cascade = CascadeType.ALL)
 	public MedicalGraduateGrades getMedicalGrades() {
 		return medicalGrades;
 	}

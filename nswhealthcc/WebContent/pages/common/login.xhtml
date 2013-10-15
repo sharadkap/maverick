@@ -11,12 +11,12 @@
         <h:form  id="loginFormId" prependId="false">
                 <div id="loginFieldsPnlId">
                     <div id="loginFieldUsrContId">
-                        <h:outputLabel id="outTxtUserNameId" value="Username:" name="outTxtUserNameNm"></h:outputLabel>
+                        <h:outputLabel id="outTxtUserNameId" value="Username " name="outTxtUserNameNm"></h:outputLabel>
                         <p:inputText id="userName" required="true" value="#{loginMgmtBean.userName}" requiredMessage="Please enter username"></p:inputText>
                         <h:outputLabel id="outLblUserNameId" for="userName" name="outLblUserNameNm"></h:outputLabel>
                     </div>
                     <div id="loginFieldPassContId">
-                        <h:outputLabel id="outTxtPasswordId" value="Password:" name="outTxtPasswordNm"></h:outputLabel>
+                        <h:outputLabel id="outTxtPasswordId" value="Password " name="outTxtPasswordNm"></h:outputLabel>
                         <p:password id="password"  required="true" value="#{loginMgmtBean.password}" requiredMessage="Please enter password"></p:password>
                         <h:outputLabel id="outLblPasswordId" for="password" name="outLblPasswordNm"></h:outputLabel>
                     </div>
