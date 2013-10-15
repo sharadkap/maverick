@@ -12,15 +12,15 @@
 	<context:component-scan base-package="au.gov.nswhealth.assessment.managed.bean" />
 	
 	<!-- Beans Declaration -->
-	<bean id="User" class="au.gov.nswhealth.assessment.model.User"/>
+	<bean id="intlMedicalGrad" class="au.gov.nswhealth.assessment.model.IntlMedicalGrads"/>
 	
 	<!-- User Service Declaration -->
-	<bean id="UserService" class="au.gov.nswhealth.assessment.user.service.UserService">
-		<property name="userDAO" ref="UserDAO" />
+	<bean id="intlMedicalGradService" class="au.gov.nswhealth.assessment.user.service.IntlMedicalGradsServiceImpl">
+		<property name="intlMedicalGradDAO" ref="intlMedicalGradDAO" />
 	</bean>
 	
 	<!-- User DAO Declaration -->
-	<bean id="UserDAO" class="au.gov.nswhealth.assessment.dao.UserDAO">
+	<bean id="intlMedicalGradDAO" class="au.gov.nswhealth.assessment.dao.IntlMedicalGradsDaoImpl">
 		<property name="sessionFactory" ref="SessionFactory" />
 	</bean>
 	
@@ -40,7 +40,8 @@
 		<property name="dataSource" ref="DataSource" />
 		<property name="annotatedClasses">
 			<list>
-				<value>au.gov.nswhealth.assessment.model.User</value>
+				<value>au.gov.nswhealth.assessment.model.IntlMedicalGrads</value>
+				<value>au.gov.nswhealth.assessment.model.MedicalGraduateGrades</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

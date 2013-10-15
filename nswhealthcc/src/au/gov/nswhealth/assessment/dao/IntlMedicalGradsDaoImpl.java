@@ -2,18 +2,18 @@ package au.gov.nswhealth.assessment.dao;
 
 import java.util.List;
 
-import au.gov.nswhealth.assessment.model.User;
+import au.gov.nswhealth.assessment.model.IntlMedicalGrads;
 
 import org.hibernate.SessionFactory;
 
 /**
  * 
- * User DAO
+ * IntlMedicalGrads DAO
  * 
  *
  */
 
-public class UserDAO implements IUserDAO {
+public class IntlMedicalGradsDaoImpl implements IntlMedicalGradsDAO {
 	
 	private SessionFactory sessionFactory;
 
@@ -36,56 +36,56 @@ public class UserDAO implements IUserDAO {
     }
 
 	/**
-	 * Add User
+	 * Add IntlMedicalGrads
 	 * 
-	 * @param  User user
+	 * @param  IntlMedicalGrads user
 	 */
 	@Override
-	public void addUser(User user) {
+	public void addIntlMedicalGrad(IntlMedicalGrads user) {
 		getSessionFactory().getCurrentSession().save(user);
 	}
 
 	/**
-	 * Delete User
+	 * Delete IntlMedicalGrads
 	 * 
-	 * @param  User user
+	 * @param  IntlMedicalGrads user
 	 */
 	@Override
-	public void deleteUser(User user) {
+	public void deleteIntlMedicalGrad(IntlMedicalGrads user) {
 		getSessionFactory().getCurrentSession().delete(user);
 	}
 
 	/**
-	 * Update User
+	 * Update IntlMedicalGrads
 	 * 
-	 * @param  User user
+	 * @param  IntlMedicalGrads user
 	 */
 	@Override
-	public void updateUser(User user) {
+	public void updateIntlMedicalGrad(IntlMedicalGrads user) {
 		getSessionFactory().getCurrentSession().update(user);
 	}
 
 	/**
-	 * Get User
+	 * Get IntlMedicalGrads
 	 * 
-	 * @param  int User Id
-	 * @return User 
+	 * @param  int IntlMedicalGrads Id
+	 * @return IntlMedicalGrads 
 	 */
 	@Override
-	public User getUserById(int id) {
+	public IntlMedicalGrads getIntlMedicalGradsById(int id) {
 		List list = getSessionFactory().getCurrentSession()
-											.createQuery("from User where id=?")
+											.createQuery("from intl_medical_grads_data where candidateNumber=?")
 									        .setParameter(0, id).list();
-		return (User)list.get(0);
+		return (IntlMedicalGrads)list.get(0);
 	}
 
 	/**
-	 * Get User List
+	 * Get IntlMedicalGrads List
 	 * 
-	 * @return List - User list
+	 * @return List - IntlMedicalGrads list
 	 */
 	@Override
-	public List<User> getUsers() {
+	public List<IntlMedicalGrads> getIntlMedicalGrads() {
 		List list = getSessionFactory().getCurrentSession().createQuery("from User").list();
 		return list;
 	}

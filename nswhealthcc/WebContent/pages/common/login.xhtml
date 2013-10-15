@@ -4,13 +4,10 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     template="/templates/layoutlogin.xhtml">
- 
 
 <ui:define name="content">
-<h:head>
-</h:head>
 <h:body>
-    <div align="right" style="">
+    <div align="right" style="background-image:url('../../images/medical_graduates.jpg'); background-size: 100%; height:100%">
         <h:form  id="loginFormId" prependId="false">
                 <div id="loginFieldsPnlId">
                     <div id="loginFieldUsrContId">
@@ -31,6 +28,7 @@
                     <p:commandButton id="btnLoginId" value="Login" action="#{loginMgmtBean.login}" styleClass="loginPanelBtn"></p:commandButton>
                   
                 </div>
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />  
         </h:form>
     </div>
     <div>

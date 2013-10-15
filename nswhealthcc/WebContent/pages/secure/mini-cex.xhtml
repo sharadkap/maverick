@@ -12,36 +12,49 @@
  <h:body>
      <h:form>      
 	     <table> 
-		     <tr>
-		     	<td><h:outputLabel for="id" value="Id : " /></td>
-		     	<td><p:inputText id="id" value="#{userMB.id}">
-		     			<f:converter converterId="javax.faces.Integer"/>
-		     		    <p:ajax event="blur" update="idMsg" />
-		     		</p:inputText>
-		     		<p:message id="idMsg" for="id" display="icon"/> 
+	     
+		      <tr>
+		     	<td><h:outputLabel for="date" value="Date " /></td>
+		     	<td><p:calendar value="#{intlMedicalGrad.assessmentDate}" id="cal" showButtonPanel="true"/>  
+		     		<p:message id="dateMsg" for="id" display="default"/> 
 		     	</td>
-		     </tr>
-		     <tr>
-		     	<td><h:outputLabel for="name" value="Name : " /></td>
-		     	<td><p:inputText id="name" value="#{userMB.name}">
-		     			<f:validateLength minimum="5" /> 
+		     	<td><h:outputLabel for="name" value="Name " /></td>
+		     	<td><p:inputText id="name" value="#{intlMedicalGrad.candidateName}">
+		     			<f:validateLength maximum="100" /> 
 		     			<p:ajax event="blur" update="nameMsg" />
 		     		</p:inputText>
-		     		<p:message id="nameMsg" for="name" display="icon"/> 
+		     		<p:message id="nameMsg" for="name" display="default"/> 
+		     	</td>
+		     	<td><h:outputLabel for="name" value="Candidate No " /></td>
+		     	<td><p:inputText id="name" value="#{intlMedicalGrad.candidateNumber}">
+		     			
+		     			<p:ajax event="blur" update="nameMsg" />
+		     		</p:inputText>
+		     		<p:message id="nameMsg" for="name" display="default"/> 
 		     	</td>
 		     </tr>
 		     <tr>
-		     	<td><h:outputLabel for="surname" value="Surname : " /></td>   
-		     	<td><p:inputText id="surname" value="#{userMB.surname}"> 
-		     			<f:validateLength minimum="5" /> 
-		     			<p:ajax event="blur" update="surnameMsg" />  
+		     
+		     	<td><h:outputLabel for="assessor" value="Assessor " /></td>
+		     	<td><p:inputText id="assessor" value="#{intlMedicalGrad.accessorName}">
+		     			<f:validateLength maximum="100" /> 
+		     		    <p:ajax event="blur" update="assessorMsg" />
 		     		</p:inputText>
-		     		<p:message id="surnameMsg" for="surname" display="icon"/> 
-		     	</td>    
-		     </tr>            
+		     		<p:message id="assessorMsg" for="assessor" display="default"/> 
+		     	</td>
+		     	<td><h:outputLabel for="position" value="Position " /></td>
+						<td><p:selectOneRadio id="options" value="#{intlMedicalGrad.assessorPosition}">
+								<f:selectItem itemLabel="Specialist" itemValue="Specialist" />
+								<f:selectItem itemLabel="Registrar" itemValue="Registrar" />
+								<f:selectItem itemLabel="CMO" itemValue="CMO" />
+							</p:selectOneRadio> <p:message id="positionMsg" for="position" display="default" /></td>
+					
+		     </tr>
+		     
+		            
 	         <tr>
-		     	<td><p:commandButton id="addUser" value="Add" action="#{userMB.addUser}" ajax="false"/></td>
-		     	<td><p:commandButton id="reset" value="Reset" action="#{userMB.reset}" ajax="false"/></td>
+		     	<td><p:commandButton id="addGradRecord" value="Save" action="#{intlMedicalGrad.addMedicalGraduateRecord}" ajax="true"/></td>
+		     	<td><p:commandButton id="reset" value="Reset" action="#{intlMedicalGrad.reset}" ajax="false"/></td>
 		     </tr>   
 	     </table>
      </h:form>      

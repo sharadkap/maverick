@@ -1,5 +1,6 @@
 package au.gov.nswhealth.assessment.beans;
  
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -7,7 +8,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
- 
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -71,11 +71,11 @@ public class LoginBean {
             }
             SecurityContextHolder.getContext().setAuthentication(result);
         } catch (BadCredentialsException e) {
-            //e.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"Access Denied", "You are not authorized to login"));  
             navigateTo = "home";
         } 
         catch (AuthenticationException e) {
-            e.printStackTrace();
+           	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"Error", "There was an error in the system.\nPlease contact admin"+e.getMessage()));
             navigateTo = "home";
         }
         return navigateTo;
